@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         end
       end
       resources :term, only: [:new,:create,:index,:show]
+      resources :translation
     end
   end
 end
