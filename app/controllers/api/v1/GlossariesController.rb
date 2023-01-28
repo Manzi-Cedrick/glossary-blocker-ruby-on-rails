@@ -8,7 +8,7 @@ module Api
             def show
                 @glossary = Glossary.find(params[:id])
                 @Terms = @glossary.term
-                render json: {status: 'SUCCESS',message: 'Single glossary',data: @Terms},status: :ok
+                render json: {status: 'SUCCESS',message: 'Single glossary',data: {glossary:@glossary,terms:@Terms}},status: :ok
             end
             def create 
                 @glossary = Glossary.new(glossary_params)
