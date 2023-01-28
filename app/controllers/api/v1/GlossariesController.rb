@@ -13,7 +13,7 @@ module Api
             def create 
                 @glossary = Glossary.new(glossary_params)
                 if @glossary.save
-                    render json: {status: 'SUCCESS',message: 'Saved glossary',data: @glossary},status: :ok
+                    render json: {status: 'SUCCESS',message: 'Saved glossary',data: @glossary},status: :created
                 else 
                     render json: {status: 'ERROR',message: 'Glossary not saved',data: @glossary.errors},status: :unprocessable_entity
                 end
@@ -45,7 +45,7 @@ module Api
                 params.permit(:source_term,:target_term)
             end
             def glossary_params
-                params.permit(:source_code_lang,:target_lang_code)
+                params.require(:glossary).permit(:source_code_lang,:target_lang_code)
             end
         end
     end
