@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_term: MyString
+  target_term: MyString
+
+two:
+  source_term: MyString
+  target_term: MyString
