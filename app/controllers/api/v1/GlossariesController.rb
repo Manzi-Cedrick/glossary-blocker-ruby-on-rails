@@ -7,7 +7,8 @@ module Api
             end
             def show
                 @glossary = Glossary.find(params[:id])
-                render json: {status: 'SUCCESS',message: 'Single glossary',data: @glossary},status: :ok
+                @Terms = @glossary.term
+                render json: {status: 'SUCCESS',message: 'Single glossary',data: @Terms},status: :ok
             end
             def create 
                 @glossary = Glossary.new(glossary_params)
@@ -29,8 +30,20 @@ module Api
                 else
                   render json: {status: 'ERROR', message:'glossary not updated', data:glossary.errors},status: :unprocessable_entity
                 end
-            end        
+            end   
+            def create_term
+                @glossary = Glossary.find(params[:id])
+                @term = @glossary.term.build(term_params)
+                if @term.save 
+                    render json: {status: 'SUCCESS',message: 'Saved term',data: @term},status: :ok
+                else
+                    render json: {status: 'ERROR',message: 'Term not saved',data: @term.errors},status: :unprocessable_entity
+                end
+            end
             private 
+            def term_params
+                params.permit(:source_term,:target_term)
+            end
             def glossary_params
                 params.permit(:source_code_lang,:target_lang_code)
             end
