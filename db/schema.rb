@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_28_095026) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_28_120716) do
   create_table "api_v1_glossaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "source_lang_code"
     t.string "target_lang_code"
@@ -34,5 +34,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_095026) do
     t.index ["glossary_id"], name: "index_terms_on_glossary_id"
   end
 
+  create_table "translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "source_language_code"
+    t.string "target_language_code"
+    t.text "source_text"
+    t.bigint "glossary_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["glossary_id"], name: "index_translations_on_glossary_id"
+  end
+
   add_foreign_key "terms", "glossaries"
+  add_foreign_key "translations", "glossaries"
 end
