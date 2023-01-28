@@ -39,7 +39,10 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 group :development, :test do
-
+  gem 'database_cleaner'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
+  gem 'rspec-rails', ">= 3.9.0"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
