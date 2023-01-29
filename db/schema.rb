@@ -11,21 +11,21 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_01_28_120716) do
-  create_table "api_v1_glossaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "api_v1_glossaries", charset: "utf8mb4", force: :cascade do |t|
     t.string "source_lang_code"
     t.string "target_lang_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "glossaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "glossaries", charset: "utf8mb4", force: :cascade do |t|
     t.string "source_code_lang"
     t.string "target_lang_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "terms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "terms", charset: "utf8mb4", force: :cascade do |t|
     t.string "source_term"
     t.string "target_term"
     t.bigint "glossary_id", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_28_120716) do
     t.index ["glossary_id"], name: "index_terms_on_glossary_id"
   end
 
-  create_table "translations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "translations", charset: "utf8mb4", force: :cascade do |t|
     t.string "source_language_code"
     t.string "target_language_code"
     t.text "source_text"
