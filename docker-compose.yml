@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  db:
+    image: "mysql:5.7"
+    restart: always
+    environment:
+      # MYSQL_ROOT_PASSWORD: {yourpassword}
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: '*********'
+    ports:
+      - "33061:3306"
+    volumes:
+      - db:/var/run/mysqld
+    logging:
+      driver: none
+  redis:
+    image: redis:4.0-alpine
+    command: redis-server
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+    logging:
+      driver: none
+  web:
+    image: ruby:3.2.0
+    command: bundle exec rails s -p 3000 -e development -b '0.0.0.0'
+    working_dir: /rails-app
+    environment:
+      DB_USERNAME: root
+      DB_PASSWORD: '*********'
+      DB_NAME: glossaries
+      DB_PORT: 3306
+      DB_HOST: db
+      RAILS_ENV: development
+      RAILS_MAX_THREADS: 5
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      BUNDLE_PATH: /bundle
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: C:/Users/Manzi Cedrick/Documents/repositories/glossary_compulsory_api
+        target: /rails-app
+      - bundle:/bundle
+    depends_on:
+      - db
+      - redis
+volumes:
+  db:
+  bundle:
+  redis:
