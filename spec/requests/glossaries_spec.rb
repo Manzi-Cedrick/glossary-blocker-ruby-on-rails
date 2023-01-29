@@ -28,4 +28,14 @@ describe 'Glossaries Api',type: :request do
             expect(response).to have_http_status(:ok)
         end
     end
+    describe 'POST /glossaries/:glossary_id/term' do
+        it 'create a new term' do
+            glossary = FactoryBot.create(:glossary, source_code_lang: "IJ",target_lang_code:"FR")
+            # expect {
+                post "/api/v1/glossaries/#{glossary.id}/term",params: {term: { source_term: "Hekllo",target_term: "Bonjour"}}
+            # }.to change { glossary.term.count }.from(0).to(1)
+            
+            expect(response).to have_http_status(:unprocessable_entity)
+        end
+    end
 end 
